@@ -176,7 +176,7 @@ $null = Disconnect-AzureAD
 $thisScriptDirectoryPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 # Create a new script in the same folder
-$newScriptPath = Join-Path $thisScriptDirectoryPath "AutomatedAutoPilotUploadTo_$TenantDisplayName.ps1"
+$newScriptPath = Join-Path $thisScriptDirectoryPath "AutomatedAutoPilotUploadTo_$TenantName.ps1"
 
 # Define the content of the new script
 $newScriptContent = @"
