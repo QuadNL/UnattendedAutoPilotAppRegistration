@@ -1,6 +1,5 @@
 # UnattendedAutoPilotAppRegistration-
 Easy deployment of Microsoft AutoPilot device registration with an app
-<#
 .SYNOPSIS
     This script creates a new Azure AD application (deletes if one exists), generates a client secret, and displays relevant details.
     It also generates a new script with the retrieved information so it can be used for automatic AutoPilot import.
@@ -27,5 +26,3 @@ Easy deployment of Microsoft AutoPilot device registration with an app
 .EXAMPLE
   .\UnattendedAutoPilotAppRegistration.ps1 -MonthsToExpire 3 -AppRegistrationName “MyApp” 
   Creates a new application password credential that expires in 3 months for an application named “MyApp”.
-
-#>
