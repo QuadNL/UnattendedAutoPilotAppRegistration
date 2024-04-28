@@ -26,7 +26,9 @@ Default value is "AutomatedAutoPilotUpload".
 .NOTES
 
 Version: 1.0
+
 Author: Elbert Beverdam
+
 Date: 2024-04-28
 
 .EXAMPLE
