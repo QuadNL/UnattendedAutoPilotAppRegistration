@@ -7,7 +7,7 @@
     The script generates a new application password credential for an Azure AD application.
     You can specify the number of months until the credential expires using the -MonthsToExpire parameter.
     By default, the credential will expire in 6 months.
-    With the retrieved information it creates a new PowerShell script in the same directory: AutomatedAutoPilotUploadTo_<yourtenantdisplayname>.ps1
+    With the retrieved information it creates a new PowerShell script in the same directory: UnattendedAutoPilotUploadTo_<yourtenantdisplayname>.ps1
 
 .PARAMETER -MonthsToExpire
     Specifies the number of months until the credential expires.
@@ -15,7 +15,7 @@
 
 .PARAMETER -AppRegistrationName
     Specifies the name of the Azure AD application.
-    Default value is "AutomatedAutoPilotUpload".
+    Default value is "UnattendedAutoPilotUpload".
 
 .NOTES
     Version: 1.0
@@ -30,7 +30,7 @@
 
 param (
     [int]$MonthsToExpire = 6,
-    [string]$AppRegistrationName = "AutomatedAutoPilotUpload"
+    [string]$AppRegistrationName = "UnattendedAutoPilotUpload"
 )
 
 
@@ -66,7 +66,7 @@ Write-Host "Connected to $TenantName." -ForegroundColor Green
 $GraphPermissions = "DeviceManagementServiceConfig.ReadWrite.All"
 $ClientSecretName = "Autopilot Registration secret"
 
-# Check if an AutomatedAutoPilotUpload Azure AD application exists
+# Check if an UnattendedAutoPilotUpload Azure AD application exists
 if ($AppRegistration = Get-AzureADApplication -Filter "DisplayName eq '$($AppRegistrationName)'" -ErrorAction SilentlyContinue) {
     # If it exists, delete the existing app registration
     Remove-AzureADApplication -ObjectId $AppRegistration.ObjectId
@@ -162,7 +162,7 @@ Write-Host "`$AppSecret = " -NoNewline
 Write-Host "`"$($ClientSecret.Value)`"" -ForegroundColor Green
 Write-Host "Appsecret $($AppRegistrationName) expires on $($EndDate)" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "Copying received content into new AutomatedAutoPilotUploadTo_$TenantName.ps1 script..." -ForegroundColor Yellow
+Write-Host "Copying received content into new UnattendedAutoPilotUploadTo_$TenantName.ps1 script..." -ForegroundColor Yellow
 Write-Host ""
 
 Start-Sleep -Seconds 5
@@ -176,7 +176,7 @@ $null = Disconnect-AzureAD
 $thisScriptDirectoryPath = Split-Path -Parent $MyInvocation.MyCommand.Definition
 
 # Create a new script in the same folder
-$newScriptPath = Join-Path $thisScriptDirectoryPath "AutomatedAutoPilotUploadTo_$TenantName.ps1"
+$newScriptPath = Join-Path $thisScriptDirectoryPath "UnattendedAutoPilotUploadTo_$TenantName.ps1"
 
 # Define the content of the new script
 $newScriptContent = @"
@@ -197,7 +197,7 @@ $newScriptContent = @"
     Date: 2024-04-28
 
 .EXAMPLE
-    .\AutomatedAutoPilotUploadTo_<tenantname>.ps1
+    .\UnattendedAutoPilotUploadTo_<tenantname>.ps1
     Uses the Azure AD application for Windows Autopilot unattended upload.
 
 #>
@@ -249,4 +249,4 @@ Uninstall-Script -Name Get-WindowsAutopilotInfo
 # Write the content to the new script
 $newScriptContent | Set-Content -Path $newScriptPath
 
-Write-Host "New AutomatedAutoPilotUploadTo_$TenantDisplayName.ps1 script created at: $newScriptPath" -ForegroundColor Yellow
+Write-Host "New UnattendedAutoPilotUploadTo_$TenantDisplayName.ps1 script created at: $newScriptPath" -ForegroundColor Yellow
