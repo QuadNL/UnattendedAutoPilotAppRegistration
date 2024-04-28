@@ -1,5 +1,5 @@
 # UnattendedAutoPilotAppRegistration
-Easy deployment of Microsoft AutoPilot device registration with an app
+Easy deployment of Microsoft AutoPilot device registration with an Entra registered app
 
 .SYNOPSIS
 
